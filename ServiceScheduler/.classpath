@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="lib/dbStub.jar"/>
+	<classpathentry kind="lib" path="lib/dmsapi.jar"/>
+	<classpathentry kind="lib" path="lib/ejb-api-3.0.jar"/>
+	<classpathentry kind="lib" path="lib/ejbclient.jar"/>
+	<classpathentry kind="lib" path="lib/java-json.jar"/>
+	<classpathentry kind="lib" path="lib/jboss-client.jar"/>
+	<classpathentry kind="lib" path="lib/jnet-3.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/json-simple-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="lib/ngejbcallbroker.jar"/>
+	<classpathentry kind="lib" path="lib/nglogger.jar"/>
+	<classpathentry kind="lib" path="lib/ngutility.jar"/>
+	<classpathentry kind="lib" path="lib/omnishared.jar"/>
+	<classpathentry kind="lib" path="lib/postgresql-42.2.5.jar"/>
+	<classpathentry kind="lib" path="lib/sqljdbc4.jar"/>
+	<classpathentry kind="lib" path="lib/stubswfscustom.jar"/>
+	<classpathentry kind="lib" path="lib/stubwfs.jar"/>
+	<classpathentry kind="lib" path="lib/wfsclient.jar"/>
+	<classpathentry kind="lib" path="lib/wfsshared.jar"/>
+	<classpathentry kind="lib" path="lib/wfwebserviceinvoker.jar"/>
+	<classpathentry kind="lib" path="lib/wfwebserviceshared.jar"/>
+	<classpathentry kind="lib" path="lib/wfxmlinterface.jar"/>
+	<classpathentry kind="lib" path="lib/wrapper.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
