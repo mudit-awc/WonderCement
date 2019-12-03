@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/Users/AWCLappy170/Documents/eclipse-workspace/FetchQualityReport/lib/ngejbcallbroker.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AWCLappy170/Documents/eclipse-workspace/FetchQualityReport/lib/postgresql-42.2.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AWCLappy170/Documents/eclipse-workspace/FetchQualityReport/lib/jnet-3.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AWCLappy170/Documents/eclipse-workspace/FetchQualityReport/lib/sqljdbc4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AWCLappy170/Documents/eclipse-workspace/FetchQualityReport/lib/wfwebserviceinvoker.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AWCLappy170/Documents/eclipse-workspace/FetchQualityReport/lib/wfwebserviceshared.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AWCLappy170/Documents/eclipse-workspace/FetchQualityReport/lib/wfxmlinterface.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AWCLappy170/Documents/eclipse-workspace/FetchQualityReport/lib/dmsapi.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AWCLappy170/Documents/eclipse-workspace/FetchQualityReport/lib/ejb-api-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AWCLappy170/Documents/eclipse-workspace/FetchQualityReport/lib/wfsshared.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AWCLappy170/Documents/eclipse-workspace/FetchQualityReport/lib/nglogger.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AWCLappy170/Documents/eclipse-workspace/FetchQualityReport/lib/stubwfs.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AWCLappy170/Documents/eclipse-workspace/FetchQualityReport/lib/wfsclient.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AWCLappy170/Documents/eclipse-workspace/FetchQualityReport/lib/java-json.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AWCLappy170/Documents/eclipse-workspace/FetchQualityReport/lib/ngutility.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AWCLappy170/Documents/eclipse-workspace/FetchQualityReport/lib/omnishared.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AWCLappy170/Documents/eclipse-workspace/FetchQualityReport/lib/wrapper.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AWCLappy170/Documents/eclipse-workspace/FetchQualityReport/lib/ejbclient.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AWCLappy170/Documents/eclipse-workspace/FetchQualityReport/lib/stubswfscustom.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AWCLappy170/Documents/eclipse-workspace/FetchQualityReport/lib/jboss-client.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AWCLappy170/Documents/eclipse-workspace/FetchQualityReport/lib/dbStub.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AWCLappy170/Documents/eclipse-workspace/FetchQualityReport/lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
