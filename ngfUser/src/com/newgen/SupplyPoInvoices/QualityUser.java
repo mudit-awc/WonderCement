@@ -86,7 +86,7 @@ public class QualityUser implements FormListener {
                    case "Btn_updateQuaratinedetails":
                         System.out.println("inside farman Btn_updateQuaratinedetails ");
                         formObject.ExecuteExternalCommand("NGAddRow", "q_quarantinemanagement");
-                        System.out.println("Testing button click");
+                        System.out.println("Testing button click_1");
                         break;
                 }
 
