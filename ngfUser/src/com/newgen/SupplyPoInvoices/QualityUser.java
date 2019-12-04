@@ -16,6 +16,7 @@ import com.newgen.common.ReadProperty;
 import com.newgen.omniforms.FormConfig;
 import com.newgen.omniforms.FormReference;
 import com.newgen.omniforms.component.IRepeater;
+import com.newgen.omniforms.component.ListView;
 import com.newgen.omniforms.component.PickList;
 import com.newgen.omniforms.context.FormContext;
 import com.newgen.omniforms.event.ComponentEvent;
@@ -23,6 +24,8 @@ import com.newgen.omniforms.event.FormEvent;
 import com.newgen.omniforms.listener.FormListener;
 import static javafx.beans.binding.Bindings.and;
 import static javafx.beans.binding.Bindings.select;
+import java.util.*;
+import java.lang.*;
 
 public class QualityUser implements FormListener {
 
@@ -47,6 +50,8 @@ public class QualityUser implements FormListener {
     String processDefId = null;
     String Query = null;
     List<List<String>> result;
+    List<List<String>> result1;
+    List<List<String>> result2;
     private String webserviceStatus;
 
     @Override
@@ -83,10 +88,41 @@ public class QualityUser implements FormListener {
             case "MOUSE_CLICKED":
 
                 switch (pEvent.getSource().getName()) {
-                   case "Btn_updateQuaratinedetails":
+                  case "Btn_updateQuaratinedetails":
                         System.out.println("inside farman Btn_updateQuaratinedetails ");
-                        formObject.ExecuteExternalCommand("NGAddRow", "q_quarantinemanagement");
-                        System.out.println("Testing button");
+                        int rowExistIndex = 0;
+                        formObject.getNGValue("Quality_itemselect");
+                        ListView ListViewq_quarantinemanagement = (ListView) formObject.getComponent("q_quarantinemanagement");
+                        int RowCountq_quarantinemanagement = ListViewq_quarantinemanagement.getRowCount();
+                        System.out.println("RowCount_q_quarantine " + RowCountq_quarantinemanagement);
+                        if (RowCountq_quarantinemanagement > 0) {
+                            System.out.println("Inside Row count > 0");
+                            String itemnumber = formObject.getNGValue("Quality_itemselect");
+                            boolean rowExist = false;
+                            
+                            for (int i = 0; i <= RowCountq_quarantinemanagement; i++) {
+                                if (itemnumber.equalsIgnoreCase(formObject.getNGValue("q_quarantinemanagement", i, 0))) {
+                                    rowExist = true;
+                                    rowExistIndex = i;
+                                    break;
+                                }
+                            }
+                            if (rowExist) {
+                                ListViewq_quarantinemanagement.setSelectedRowIndex(rowExistIndex);
+                                System.out.println("Set Select row upper wala");
+                                System.out.println("Selected row : " + ListViewq_quarantinemanagement.getSelectedRowIndex());
+                                formObject.ExecuteExternalCommand("NGModifyRow", "q_quarantinemanagement");
+                            }
+                            else{
+                               System.out.println("outside add row");
+                            formObject.ExecuteExternalCommand("NGAddRow", "q_quarantinemanagement"); 
+                            }
+
+                         
+                        } else {
+                            System.out.println("outside add row");
+                            formObject.ExecuteExternalCommand("NGAddRow", "q_quarantinemanagement");
+                        }
                         break;
                 }
 
