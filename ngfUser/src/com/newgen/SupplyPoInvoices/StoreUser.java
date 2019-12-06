@@ -162,6 +162,49 @@ public class StoreUser implements FormListener {
                         break;
 
                     case "Btn_GenerateGRN":
+
+                        String itemid = formObject.getNGValue("Quality_itemselect");
+                        int valueatGRN = 0;
+                        String valueatitemid = "";
+                        float unitPrice = 0,
+                         sumofUnitPrice = 0,
+                         inviceAmount = 0;
+
+                        ListView ListViewq_polinesStore = (ListView) formObject.getComponent("q_polines");
+                        int RowCountq_polines = ListViewq_polinesStore.getRowCount();
+                        System.out.println("RowCountq_polines " + RowCountq_polines);
+
+                        ListView ListViewq_gateentrylinesStore = (ListView) formObject.getComponent("q_gateentrylines");
+                        int RowCountq_gateentrylines = ListViewq_gateentrylinesStore.getRowCount();
+                        System.out.println("RowCountq_gateentrylines " + RowCountq_gateentrylines);
+
+                        for (int j = 0; j < RowCountq_gateentrylines; j++) {
+                            System.out.println("pehla for loop");
+                            valueatitemid = formObject.getNGValue("q_gateentrylines", j, 0);
+                            valueatGRN = Integer.parseInt(formObject.getNGValue("q_gateentrylines", j, 3));
+                            System.out.println("valueatGRN : " + valueatGRN);
+                            System.out.println("valueatitemid : " + valueatitemid);
+
+                            for (int a = 0; a < RowCountq_gateentrylines; a++) {
+                                System.out.println("Doosra for loop");
+                                if (valueatitemid.equalsIgnoreCase(formObject.getNGValue("q_polines", a, 1))) {
+                                    System.out.println("If ke ander");
+                                    unitPrice = Float.parseFloat(formObject.getNGValue("q_polines", a, 6));
+                                    System.out.println("valueatGRN*unitPrice : " + (valueatGRN * unitPrice));
+                                    sumofUnitPrice = sumofUnitPrice + (valueatGRN * unitPrice);
+
+                                }
+                            }
+                        }
+                        System.out.println("sumofUnitPrice :: " + sumofUnitPrice);
+                        inviceAmount = Float.parseFloat(formObject.getNGValue("invoiceamount"));
+                        System.out.println("invoiceamount :: " + inviceAmount);
+                        if(inviceAmount==sumofUnitPrice){
+                            System.out.println("Equal h mere bhai");
+                        }else{
+                            System.out.println("Tata bye bye");
+                        }
+
                         try {
                             System.out.println("Inside button click Btn_GenerateGRN");
                             JSONObject request_json = new JSONObject();
@@ -176,11 +219,11 @@ public class StoreUser implements FormListener {
                             int rowcount_poline = ListViewq_poline.getRowCount();
                             for (int i = 0; i < rowcount_poline; i++) {
                                 String registrationtype = formObject.getNGValue(SerialBatchRegistrationLV, i, 0);
-                                String itemid = formObject.getNGValue(SerialBatchRegistrationLV, i, 1);
+                                String item_id = formObject.getNGValue(SerialBatchRegistrationLV, i, 1);
                                 String serialno = "", batchno = "";
                                 System.out.println("registration type : " + registrationtype);
                                 JSONObject serialbatchregistration = new JSONObject();
-                                serialbatchregistration.put("ItemId", itemid);
+                                serialbatchregistration.put("ItemId", item_id);
                                 serialbatchregistration.put("Quantity", formObject.getNGValue(SerialBatchRegistrationLV, i, 2));
                                 serialbatchregistration.put("MfgDate", formObject.getNGValue(SerialBatchRegistrationLV, i, 4));
                                 serialbatchregistration.put("ExpDate", formObject.getNGValue(SerialBatchRegistrationLV, i, 5));
@@ -196,7 +239,7 @@ public class StoreUser implements FormListener {
 
                                 Query = "select linenumber from cmplx_poline where "
                                         + "pinstanceid = '" + processInstanceId + "' "
-                                        + "and itemnumber = '" + itemid + "' ";
+                                        + "and itemnumber = '" + item_id + "' ";
                                 result = formObject.getDataFromDataSource(Query);
                                 serialbatchregistration.put("LineNum", result.get(0).get(0));
                                 grnlinearray.put(serialbatchregistration);

@@ -108,6 +108,74 @@ public class QualityUser implements FormListener {
                             }
                         }
                         break;
+                    case "Q_acceptedquantity":
+                        System.out.println("inside mine Q_acceptedquantity value changed");
+                        int acceptedQint = Integer.parseInt(formObject.getNGValue("Q_acceptedquantity"));
+                        System.out.println("value of acceptedQint " + acceptedQint);
+
+                        String itemid = formObject.getNGValue("Quality_itemselect");
+                        String valueatGRN = "";
+                     //     int sumofGRN = 0;
+
+                        ListView ListViewq_gateentrylines = (ListView) formObject.getComponent("q_gateentrylines");
+                        int RowCountq_gateentrylines = ListViewq_gateentrylines.getRowCount();
+                        System.out.println("RowCountq_gateentrylines " + RowCountq_gateentrylines);
+
+                        for (int j = 0; j < RowCountq_gateentrylines; j++) {
+                            if (itemid.equalsIgnoreCase(formObject.getNGValue("q_gateentrylines", j, 0))) {
+                                System.out.println("&& : " + itemid + " for trying GRN Value: " + formObject.getNGValue("q_gateentrylines", j, 3));
+                                valueatGRN = formObject.getNGValue("q_gateentrylines", j, 3);
+                                System.out.println("valueatGRN : " + valueatGRN);
+                              //  sumofGRN = sumofGRN + Integer.parseInt(valueatGRN);
+                            }
+                        }
+
+                        int valueatGRNQint = Integer.parseInt(valueatGRN);
+                        System.out.println("value of valueatGRNQint " + valueatGRNQint);
+                  //      System.out.println("value of sumofGRN 1 " + sumofGRN);
+
+                        if (acceptedQint > valueatGRNQint) {
+                            System.out.println("hello");
+                            throw new ValidatorException(new FacesMessage("Value is exceeding by GRN Qty", ""));
+                        }else if(acceptedQint < valueatGRNQint){
+                            System.out.println("aagya bhai mera ");
+                             int valuefordefaultreject = valueatGRNQint - acceptedQint;
+                             formObject.setNGValue("Q_rejectedquantity", valuefordefaultreject);
+                        }
+
+                        break;
+                    case "Q_rejectedquantity":
+                        System.out.println("inside mine Q_rejectedquantity value changed");
+                        int rejectedQint = Integer.parseInt(formObject.getNGValue("Q_rejectedquantity"));
+                        System.out.println("value of rejectedQint " + rejectedQint);
+
+                        String itemid2 = formObject.getNGValue("Quality_itemselect");
+                        String valueatGRN2 = "";
+
+                        ListView ListViewq_gateentrylines2 = (ListView) formObject.getComponent("q_gateentrylines");
+                        int RowCountq_gateentrylines2 = ListViewq_gateentrylines2.getRowCount();
+                        System.out.println("RowCountq_gateentrylines2 " + RowCountq_gateentrylines2);
+
+                        for (int j = 0; j < RowCountq_gateentrylines2; j++) {
+                            if (itemid2.equalsIgnoreCase(formObject.getNGValue("q_gateentrylines", j, 0))) {
+                                System.out.println("&& : " + itemid2 + " for trying GRN Value: " + formObject.getNGValue("q_gateentrylines", j, 3));
+                                valueatGRN2 = formObject.getNGValue("q_gateentrylines", j, 3);
+                                System.out.println("valueatGRN2 : " + valueatGRN2);
+                                
+                            }
+                        }
+
+                        int valueatGRNQint2 = Integer.parseInt(valueatGRN2);
+                        if (rejectedQint > valueatGRNQint2) {
+                            System.out.println("hello2");
+                            throw new ValidatorException(new FacesMessage("Value is exceeding by GRN Qty", ""));
+                        }else if(rejectedQint < valueatGRNQint2){
+                            System.out.println("aagya bhai mera reject m ");
+                             int valuefordefaultaccept = valueatGRNQint2 - rejectedQint;
+                             formObject.setNGValue("Q_acceptedquantity", valuefordefaultaccept);
+                        }
+
+                        break;
 
                 }
                 break;
@@ -139,6 +207,27 @@ public class QualityUser implements FormListener {
                             }
                         }
                         System.out.println("sumofGRN : " + sumofGRN);
+                        //====================
+                        String acceptedQ = formObject.getNGValue("Q_acceptedquantity");
+                        String rejectedQ = formObject.getNGValue("Q_rejectedquantity");
+                        System.out.println("value of acceptedQ " + acceptedQ);
+                        System.out.println("value of rejectedQ " + rejectedQ);
+
+//                        int acceptedQint = Integer.parseInt(formObject.getNGValue("Q_acceptedquantity"));
+//                        int rejectedQint = Integer.parseInt(formObject.getNGValue("Q_rejectedquantity"));
+//                        int valueatGRNQint = Integer.parseInt(valueatGRN);
+//                        System.out.println("value of acceptedQint " + acceptedQint);
+//                        System.out.println("value of rejectedQint " + rejectedQint);
+//                        System.out.println("value of valueatGRNQint " + valueatGRNQint);
+                        if ((acceptedQ == null || acceptedQ == "") && (rejectedQ == null || rejectedQ == "")) {
+                            System.out.println("fill details m agya");
+                            throw new ValidatorException(new FacesMessage("Kindly fill all the details", ""));
+                        }
+//                        else if ((acceptedQint > valueatGRNQint) || (rejectedQint > valueatGRNQint)) {
+//                            System.out.println("hello");
+//                            throw new ValidatorException(new FacesMessage("Value is exceeding by GRN Qty", ""));
+//                        }
+
 //============================================---------------------
                         int rowExistIndex = 0;
                         ListView ListViewq_quarantinemanagement = (ListView) formObject.getComponent("q_quarantinemanagement");
@@ -188,7 +277,13 @@ public class QualityUser implements FormListener {
                                 }
                             }
 
-                        } else if(RowCountq_quarantinemanagement == 0){
+                        } //                        else if(RowCountq_quarantinemanagement==0){
+                        //                             
+                        //                            System.out.println("fill details m agya"); 
+                        //                            throw new ValidatorException(new FacesMessage("Kindly fill all the details", "")); 
+                        //                        
+                        //                        } 
+                        else {
                             acceptedQty = Integer.parseInt(formObject.getNGValue("Q_acceptedquantity"));
                             rejectedQty = Integer.parseInt(formObject.getNGValue("Q_rejectedquantity"));
                             System.out.println("acceptedQty3 : " + acceptedQty);
@@ -203,11 +298,7 @@ public class QualityUser implements FormListener {
                                 throw new ValidatorException(new FacesMessage("Sum of Accepted Qty & Rejected Qty is exceeding by GRN Qty", ""));
                             }
                         }
-                        else{
-                            System.out.println("fill details m agya"); 
-                             throw new ValidatorException(new FacesMessage("Kindly fill all the details", "")); 
-                        }
-                            
+
                         break;
                 }
 
@@ -227,6 +318,8 @@ public class QualityUser implements FormListener {
         System.out.println(" -------------------Intiation Workstep Loaded from formloaded.----------------");
         formObject = FormContext.getCurrentInstance().getFormReference();
         formConfig = FormContext.getCurrentInstance().getFormConfig();
+        formObject.setSelectedSheet("Tab2", 2);
+        
         try {
 
             activityName = formObject.getWFActivityName();
