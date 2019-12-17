@@ -3,31 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.newgen.ServicePoInvoices;
+package com.newgen.NonPoInvoices1;
 
 import com.newgen.common.General;
 import com.newgen.omniforms.FormConfig;
 import com.newgen.omniforms.FormReference;
-import com.newgen.omniforms.component.IRepeater;
+ import com.newgen.omniforms.component.IRepeater;
 import com.newgen.omniforms.component.ListView;
 import com.newgen.omniforms.component.PickList;
 import com.newgen.omniforms.context.FormContext;
 import com.newgen.omniforms.event.ComponentEvent;
 import com.newgen.omniforms.event.FormEvent;
 import com.newgen.omniforms.listener.FormListener;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import javax.faces.application.FacesMessage;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.faces.validator.ValidatorException;
 
 /**
  *
  * @author Richa Maheshwari
  */
-public class Head implements FormListener {
+public class Accounts implements FormListener {
 
     FormReference formObject = null;
     FormConfig formConfig = null;
@@ -45,6 +43,8 @@ public class Head implements FormListener {
     List<List<String>> result;
     PickList objPicklist;
     General objGeneral = null;
+     List<List<String>> result1;
+      String Query1 = null;
 
     @Override
     public void continueExecution(String arg0, HashMap<String, String> arg1) {
@@ -54,9 +54,9 @@ public class Head implements FormListener {
     @Override
     public void eventDispatched(ComponentEvent pEvent) throws ValidatorException {
         // TODO Auto-generated method stub
-//        System.out.println("Value Change Event :" + pEvent);
-//        System.out.println("pEvent.getType() :" + pEvent.getType());
-//        System.out.println("pEvent.getType().name() :" + pEvent.getType().name());
+        System.out.println("Value Change Event :" + pEvent);
+        System.out.println("pEvent.getType() :" + pEvent.getType());
+        System.out.println("pEvent.getType().name() :" + pEvent.getType().name());
         formObject = FormContext.getCurrentInstance().getFormReference();
         formConfig = FormContext.getCurrentInstance().getFormConfig();
 
@@ -65,56 +65,90 @@ public class Head implements FormListener {
             case "VALUE_CHANGED":
                 switch (pEvent.getSource().getName()) {
                     case "":
+
                         break;
                 }
                 break;
-
             case "MOUSE_CLICKED":
                 switch (pEvent.getSource().getName()) {
-                    case "Btn_Add_linedetails1":
-                        int serialno;
+                    case "Btn_Add_linedetails_1":
+                        //System.out.println("");
+                        int serialno1;
                         //get row count of list view
-                        ListView ListViewq_linedetails1 = (ListView) formObject.getComponent("q_linedetails1");
-                        int RowCount_q_linedetails1 = ListViewq_linedetails1.getRowCount();
-                        System.out.println("RowCount_q_linedetails1 " + RowCount_q_linedetails1);
+                        ListView ListViewq_linedetails_1 = (ListView) formObject.getComponent("q_linedetails_1");
+                        int RowCount_q_linedetails_1 = ListViewq_linedetails_1.getRowCount();
+                        System.out.println("RowCount_q_linedetails_1 " + RowCount_q_linedetails_1);
                         //genrate the serial no
-                        serialno = RowCount_q_linedetails1 + 1;
-                        System.out.println("serialno " + serialno);
+                        serialno1 = RowCount_q_linedetails_1 + 1;
+                        System.out.println("serialno1 " + serialno1);
                         //set value in serial no text field
-                        formObject.setNGValue("Text12", serialno);
-                        formObject.ExecuteExternalCommand("NGAddRow", "q_linedetails1");
+                        formObject.setNGValue("Text34", serialno1);
+                        formObject.ExecuteExternalCommand("NGAddRow", "q_linedetails_1");
                         break;
-                    case "Btn_Modify_linedetails1":
-                        formObject.ExecuteExternalCommand("NGModifyRow", "q_linedetails1");
-                        break;
-                    case "Btn_Add_linedetails2":
+                    case "Btn_Add_linedetails_2":
                         int serialno2;
                         //get row count of list view
-                        ListView ListViewq_linedetails2 = (ListView) formObject.getComponent("q_linedetails2");
-                        int RowCount_q_linedetails2 = ListViewq_linedetails2.getRowCount();
-
+                        ListView ListViewq_linedetails_2 = (ListView) formObject.getComponent("q_linedetails_2");
+                        int RowCount_q_linedetails_2 = ListViewq_linedetails_2.getRowCount();
+                        System.out.println("RowCount_q_linedetails_2 " + RowCount_q_linedetails_2);
                         //genrate the serial no
-                        serialno2 = RowCount_q_linedetails2 + 1;
+                        serialno2 = RowCount_q_linedetails_2 + 1;
+                        System.out.println("serialno2 " + serialno2);
                         //set value in serial no text field
-                        formObject.setNGValue("Text19", serialno2);
-                        formObject.ExecuteExternalCommand("NGAddRow", "q_linedetails2");
+                        formObject.setNGValue("Text52", serialno2);
+                        formObject.ExecuteExternalCommand("NGAddRow", "q_linedetails_2");
                         break;
-                    case "Btn_Modify_linedetails2":
-                        formObject.ExecuteExternalCommand("NGModifyRow", "q_linedetails2");
+                    case "Btn_Add_linedetails_3":
+                        int serialno3;
+                        //get row count of list view
+                        ListView ListViewq_linedetails_3 = (ListView) formObject.getComponent("q_linedetails_3");
+                        int RowCount_q_linedetails_3 = ListViewq_linedetails_3.getRowCount();
+                        System.out.println("RowCount_q_linedetails_3 " + RowCount_q_linedetails_3);
+                        //genrate the serial no
+                        serialno3 = RowCount_q_linedetails_3 + 1;
+                        System.out.println("serialno3 " + serialno3);
+                        //set value in serial no text field
+                        formObject.setNGValue("Text58", serialno3);
+                        formObject.ExecuteExternalCommand("NGAddRow", "q_linedetails_3");
                         break;
-                    //buttons for other Details Table    
-                    case "Btn_Add_otherdetails":
-                        formObject.ExecuteExternalCommand("NGAddRow", "q_otherdetails");
+                    case "Btn_Add_linedetails_4":
+                        int serialno4;
+                        //get row count of list view
+                        ListView ListViewq_linedetails_4 = (ListView) formObject.getComponent("q_linedetails_4");
+                        int RowCount_q_linedetails_4 = ListViewq_linedetails_4.getRowCount();
+                        System.out.println("RowCount_q_linedetails_4 " + RowCount_q_linedetails_4);
+                        //genrate the serial no
+                        serialno4 = RowCount_q_linedetails_4 + 1;
+                        System.out.println("serialno4 " + serialno4);
+                        //set value in serial no text field
+                        formObject.setNGValue("Text64", serialno4);
+                        formObject.ExecuteExternalCommand("NGAddRow", "q_linedetails_4");
                         break;
-                    case "Btn_Delete_otherdetails":
-                        formObject.ExecuteExternalCommand("NGDeleteRow", "q_otherdetails");
+                    case "Btn_Add_otherdetails_npo":
+                        formObject.ExecuteExternalCommand("NGAddRow", "q_otherdetails_npo");
                         break;
-                    case "Btn_Modify_otherdetails":
-                        formObject.ExecuteExternalCommand("NGModifyRow", "q_otherdetails");
+
+                    
+                    case "Btn_Delete_otherdetails_npo":
+                        formObject.ExecuteExternalCommand("NGDeleteRow", "q_otherdetails_npo");
+                        break;
+                    case "Btn_Modify_linedetails_1":
+                        formObject.ExecuteExternalCommand("NGModifyRow", "q_linedetails_1");
+                        break;
+                    case "Btn_Modify_linedetails_2":
+                        formObject.ExecuteExternalCommand("NGModifyRow", "q_linedetails_2");
+                        break;
+                    case "Btn_Modify_linedetails_3":
+                        formObject.ExecuteExternalCommand("NGModifyRow", "q_linedetails_3");
+                        break;
+                    case "Btn_Modify_linedetails_4":
+                        formObject.ExecuteExternalCommand("NGModifyRow", "q_linedetails_4");
+                        break;
+                    case "Btn_Modify_otherdetails_npo":
+                        formObject.ExecuteExternalCommand("NGModifyRow", "q_otherdetails_npo");
                         break;
                 }
                 break;
-
             case "TAB_CLICKED":
                 switch (pEvent.getSource().getName()) {
                     case "":
@@ -133,6 +167,7 @@ public class Head implements FormListener {
         formObject = FormContext.getCurrentInstance().getFormReference();
         formConfig = FormContext.getCurrentInstance().getFormConfig();
         try {
+
             // objGeneral = new General();
             engineName = formConfig.getConfigElement("EngineName");
             sessionId = formConfig.getConfigElement("DMSSessionId");
@@ -151,6 +186,11 @@ public class Head implements FormListener {
             System.out.println("Username====" + userName);
             System.out.println("workItemId====" + workItemId);
 
+            if (activityName.equalsIgnoreCase("Introduction")||activityName.equalsIgnoreCase("Initiator")) {
+                formObject.setVisible("filestatus", false);
+                formObject.setVisible("Label23", false);
+            }
+           
 //  ************************************************************************************
         } catch (Exception e) {
             System.out.println("Exception in FieldValueBagSet::::" + e.getMessage());
@@ -164,17 +204,20 @@ public class Head implements FormListener {
         // TODO Auto-generated method stub     
         //objGeneral = new General();
         System.out.println("----------------------Intiation Workstep Loaded from form populated........---------------------------");
- Query = "select statename from ngmaster_statename";
+        System.out.println("processInstanceID is " + processInstanceId);
+        
+        formObject.setNGValue("filestatus", null);
+        System.out.println("filestatus value"+formObject.getNGValue("filestatus"));
+//**************************************************************************************************************************************************        
+       Query = "select statename from ngmaster_statename";
         System.out.println("query is :" + Query);
         result = formObject.getDataFromDataSource(Query);
         System.out.println("result is :" + result);
-        System.out.println("result.size() : "+result.size());
-        for (int a = 0; a < result.size(); a++) {
-            System.out.println("the result a 00 index richa" + result.get(a).get(0));
-
-            formObject.addComboItem("servicegiveninstate",result.get(a).get(0),result.get(a).get(0));
-        
-        }     
+        for (int i = 0; i < result.size(); i++) {
+            formObject.addComboItem("Drop_ss1", result.get(i).get(1), result.get(i).get(0));
+            formObject.addComboItem("Drop_ss2", result.get(i).get(1), result.get(i).get(0));
+            formObject.addComboItem("Drop_ss3", result.get(i).get(1), result.get(i).get(0));
+    }
     }
 
     @Override
@@ -205,76 +248,29 @@ public class Head implements FormListener {
         formObject = FormContext.getCurrentInstance().getFormReference();
         formConfig = FormContext.getCurrentInstance().getFormConfig();
         System.out.println("**********-------SUBMIT FORM Started------------*************");
-        formObject.setNGValue("login_user", userName);
-        // IRepeater repeater1 = formObject.getRepeaterControl("Frame20");
-        //****************************************************************************************
-       /* try {
-         Query = "";
-         Query = "select count(*) from complex_cmddmd where procid = '" + processInstanceId + "' and status_of = 'Pending'";
-         System.out.println("Query is " + Query);
-         result = formObject.getDataFromDataSource(Query);
-         System.out.println("result is " + result);
-         String count = (String) ((List) result.get(0)).get(0);
-
-         formObject.setNGValue("count1", count);
-
-         } catch (Exception e) {
-         e.printStackTrace();
-         } */
-//        int a = repeater1.getRepeaterRowCount();
-//        for (int i = 0; i < a; i++) {
-//            System.out.println("values are " + repeater1.getValue(i, "q_cmddmd_status_of"));
-//            if (repeater1.getValue(i, "q_cmddmd_status_of").equalsIgnoreCase("Pending")) {
-//                formObject.setNGValue("count1", "1");
-//                break;
-//            }
-//
-//        }
-
         
+          try {
             String proctype = formObject.getNGValue("proctype");
-            int levelflag = Integer.parseInt(formObject.getNGValue("levelflag")) + 1;
-            System.out.println("levelflag : " + levelflag);
-            // Query1 = "select UserName from ApproverMaster where Head='" + proctype + "' "
-                   // + "order by ApproverLevel desc limit 1
-            try {
-                String state=formObject.getNGValue("servicegiveninstate");
-              if(!activityName.equalsIgnoreCase("Accounts")){
-                  System.out.println("inside initiator and Approver activity");
-            Query = "select TOP 1 ApproverName from ApproverMaster where Head='" + proctype + "' "
-                    + "and ApproverLevel='" + levelflag + "'and State ='" + state + "'";
-            System.out.println("Query:" + Query);
-            result = formObject.getDataFromDataSource(Query);
-            System.out.println("result" + result);
-            if (result.size() > 0) {
-                System.out.println("assignto" + result.get(0).get(0));
-                formObject.setNGValue("assignto", result.get(0).get(0));
-                formObject.setNGValue("levelflag", levelflag);
-            } else {
-                formObject.setNGValue("assignto", "NA");
+            String state=formObject.getNGValue("servicegiveninstate");
+            if(activityName.equalsIgnoreCase("Accounts")){
+            Query1 = "select ApproverName from ApproverMaster where Head='" + proctype + "' "
+                    + "order by ApproverLevel desc limit 1";
+            if(!proctype.equalsIgnoreCase("Demurrage and Wharfage (Plant/GU) (Rail)")||!proctype.equalsIgnoreCase("Primary Freight and Freight on clinker Sale (Rail)")||!proctype.equalsIgnoreCase("Other Logistic Expenses (Rail)")||!proctype.equalsIgnoreCase("Travel Allowance Bills (TA Bills) (Train)")){
+            Query1 = "select ApproverName from ApproverMaster where Head='"+ proctype +"' and State = '"+ state +"' order by ApproverLevel desc limit 1";
             }
-              }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-            try{
-                String state=formObject.getNGValue("servicegiveninstate");
-        if(activityName.equalsIgnoreCase("Accounts")){
-            System.out.println("inside activity accounts");
-            Query = "select TOP 1 ApproverName from ApproverMaster where Head='" + proctype + " 'and State = '"+ state +"'"
-                    + " order by ApproverLevel desc";
-            System.out.println("Query1:" + Query);
-            result = formObject.getDataFromDataSource(Query);
-                System.out.println("result is"+result);
-            formObject.setNGValue("assignto", result.get(0).get(0));
+            System.out.println("Query1:" + Query1);
+            result1 = formObject.getDataFromDataSource(Query1);
+                System.out.println("result is"+result1);
+            formObject.setNGValue("assignto", result1.get(0).get(0));
                 System.out.println("value in assign to"+formObject.getNGValue("assignto"));
-        } 
-    }
-            catch (Exception e) {
+        
+        }
+          }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
+
     @Override
     public void initialize() {
         throw new UnsupportedOperationException("Not supported yet.");
