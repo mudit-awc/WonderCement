@@ -216,7 +216,7 @@ public class Approver implements FormListener {
         //objGeneral = new General();
         System.out.println("----------------------Intiation Workstep Loaded from form populated........---------------------------");
         System.out.println("processInstanceID is " + processInstanceId);
-        
+        System.out.println("richa");
         formObject.setNGValue("filestatus", null);
         System.out.println("filestatus value"+formObject.getNGValue("filestatus"));
 //**************************************************************************************************************************************************        
@@ -224,10 +224,10 @@ public class Approver implements FormListener {
         System.out.println("query is :" + Query);
         result = formObject.getDataFromDataSource(Query);
         System.out.println("result is :" + result);
-        for (int i = 0; i < result.size(); i++) {
-            formObject.addComboItem("Drop_ss1", result.get(i).get(1), result.get(i).get(1));
-            formObject.addComboItem("Drop_ss2", result.get(i).get(1), result.get(i).get(1));
-            formObject.addComboItem("Drop_ss3", result.get(i).get(1), result.get(i).get(1));
+        for (int c = 0; c < result.size(); c++) {
+            formObject.addComboItem("Drop_ss1", result.get(c).get(0), result.get(c).get(0));
+            formObject.addComboItem("Drop_ss2", result.get(c).get(0), result.get(c).get(0));
+            formObject.addComboItem("Drop_ss3", result.get(c).get(0), result.get(c).get(0));
     }
     }
 
@@ -269,10 +269,10 @@ public class Approver implements FormListener {
             System.out.println("levelflag : " + levelflag);
             //Query = "select UserName from ApproverMaster where Head='" + proctype + "' "
                     //+ "and Level='" + levelflag + "' limit 1";
-             Query="select ApproverName from ApproverMaster where Head ='" + proctype + "'and ApproverLevel='" + levelflag + "'";
+             Query="select TOP 1 ApproverName from ApproverMaster where Head ='" + proctype + "'and ApproverLevel='" + levelflag + "'";
                     //+"and State ='" + state + "'";
             if(!proctype.equalsIgnoreCase("Demurrage and Wharfage (Plant/GU) (Rail)")||!proctype.equalsIgnoreCase("Primary Freight and Freight on clinker Sale (Rail)")||!proctype.equalsIgnoreCase("Other Logistic Expenses (Rail)")||!proctype.equalsIgnoreCase("Travel Allowance Bills (TA Bills) (Train)")){
-           Query="select ApproverName from ApproverMaster where Head ='" + proctype + "'and ApproverLevel='" + levelflag + "'"
+           Query="select TOP 1 ApproverName from ApproverMaster where Head ='" + proctype + "'and ApproverLevel='" + levelflag + "'"
                     +"and State ='" + state + "'";
             }
             //Query= Query="select ApproverName from ApproverMaster where State ='" + state + "' and Head ='" + proctype + "' and ApproverLevel='" + levelflag + "'";;

@@ -164,7 +164,10 @@ public class Head implements FormListener {
         // TODO Auto-generated method stub     
         //objGeneral = new General();
         System.out.println("----------------------Intiation Workstep Loaded from form populated........---------------------------");
- Query = "select statename from ngmaster_statename";
+        formObject.setNGValue("filestatus", null);
+        System.out.println("filestatus value"+formObject.getNGValue("filestatus"));
+        
+        Query = "select statename from ngmaster_statename";
         System.out.println("query is :" + Query);
         result = formObject.getDataFromDataSource(Query);
         System.out.println("result is :" + result);
@@ -262,7 +265,7 @@ public class Head implements FormListener {
         if(activityName.equalsIgnoreCase("Accounts")){
             System.out.println("inside activity accounts");
             Query = "select TOP 1 ApproverName from ApproverMaster where Head='" + proctype + " 'and State = '"+ state +"'"
-                    + " order by ApproverLevel desc";
+                    + " order by ApproverLevel DESC";
             System.out.println("Query1:" + Query);
             result = formObject.getDataFromDataSource(Query);
                 System.out.println("result is"+result);

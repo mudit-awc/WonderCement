@@ -83,9 +83,9 @@ public class QualityUser implements FormListener {
                         System.out.println("inside Quality_itemselect value changed");
                         String itemidinchange = formObject.getNGValue("Quality_itemselect");
                         String accept = "",
-                        reject = "",
-                        accepremarks = "",
-                        rejectremarks = "";
+                         reject = "",
+                         accepremarks = "",
+                         rejectremarks = "";
                         ListView ListViewq_quarantinemanagement = (ListView) formObject.getComponent("q_quarantinemanagement");
                         int RowCountq_quarantinemanagement = ListViewq_quarantinemanagement.getRowCount();
                         System.out.println("RowCount_q_quarantine_OLD " + RowCountq_quarantinemanagement);
@@ -181,62 +181,33 @@ public class QualityUser implements FormListener {
 
                 switch (pEvent.getSource().getName()) {
                     case "Btn_updateQuaratinedetails":
-                        System.out.println("inside * Btn_updateQuaratinedetails ");
-
-                        //Calculating GRN Quality
-                        int sumofGRN = 0;
-                        String valueatGRN = "";
-                        int acceptedQty = 0,
-                         rejectedQty = 0,
-                         sumofAccepReject = 0;
+                        int acceptedQty,
+                         rejectedQty,
+                         sumofAccepReject,
+                         rowExistIndex = 0,
+                         sumofGRN = 0;
+                        boolean rowExist = false;
+                        String valueatGRN;
                         String itemid = formObject.getNGValue("Quality_itemselect");
-
                         ListView ListViewq_gateentrylines = (ListView) formObject.getComponent("q_gateentrylines");
                         int RowCountq_gateentrylines = ListViewq_gateentrylines.getRowCount();
-                        System.out.println("RowCountq_gateentrylines " + RowCountq_gateentrylines);
-
                         for (int j = 0; j < RowCountq_gateentrylines; j++) {
                             if (itemid.equalsIgnoreCase(formObject.getNGValue("q_gateentrylines", j, 0))) {
-                                System.out.println("&& : " + itemid + " for trying GRN Value: " + formObject.getNGValue("q_gateentrylines", j, 3));
                                 valueatGRN = formObject.getNGValue("q_gateentrylines", j, 3);
-                                System.out.println("valueatGRN : " + valueatGRN);
                                 sumofGRN = sumofGRN + Integer.parseInt(valueatGRN);
                             }
                         }
-                        System.out.println("sumofGRN : " + sumofGRN);
-                        //====================
                         String acceptedQ = formObject.getNGValue("Q_acceptedquantity");
                         String rejectedQ = formObject.getNGValue("Q_rejectedquantity");
-                        System.out.println("value of acceptedQ " + acceptedQ);
-                        System.out.println("value of rejectedQ " + rejectedQ);
 
-//                        int acceptedQint = Integer.parseInt(formObject.getNGValue("Q_acceptedquantity"));
-//                        int rejectedQint = Integer.parseInt(formObject.getNGValue("Q_rejectedquantity"));
-//                        int valueatGRNQint = Integer.parseInt(valueatGRN);
-//                        System.out.println("value of acceptedQint " + acceptedQint);
-//                        System.out.println("value of rejectedQint " + rejectedQint);
-//                        System.out.println("value of valueatGRNQint " + valueatGRNQint);
-                        if ((acceptedQ == null || acceptedQ == "") && (rejectedQ == null || rejectedQ == "")) {
-                            System.out.println("fill details m agya");
+                        if ((acceptedQ == null || "".equals(acceptedQ)) && (rejectedQ == null || "".equals(rejectedQ))) {
                             throw new ValidatorException(new FacesMessage("Kindly fill all the details", ""));
                         }
-//                        else if ((acceptedQint > valueatGRNQint) || (rejectedQint > valueatGRNQint)) {
-//                            System.out.println("hello");
-//                            throw new ValidatorException(new FacesMessage("Value is exceeding by GRN Qty", ""));
-//                        }
-
-//============================================---------------------
-                        int rowExistIndex = 0;
                         ListView ListViewq_quarantinemanagement = (ListView) formObject.getComponent("q_quarantinemanagement");
                         int RowCountq_quarantinemanagement = ListViewq_quarantinemanagement.getRowCount();
-                        System.out.println("RowCount_q_quarantine " + RowCountq_quarantinemanagement);
                         if (RowCountq_quarantinemanagement > 0) {
-                            System.out.println("Inside Row count > 0");
-                            String itemnumber = formObject.getNGValue("Quality_itemselect");
-                            boolean rowExist = false;
-
                             for (int i = 0; i <= RowCountq_quarantinemanagement; i++) {
-                                if (itemnumber.equalsIgnoreCase(formObject.getNGValue("q_quarantinemanagement", i, 0))) {
+                                if (itemid.equalsIgnoreCase(formObject.getNGValue("q_quarantinemanagement", i, 0))) {
                                     rowExist = true;
                                     rowExistIndex = i;
                                     break;
@@ -244,9 +215,6 @@ public class QualityUser implements FormListener {
                             }
                             if (rowExist) {
                                 ListViewq_quarantinemanagement.setSelectedRowIndex(rowExistIndex);
-                                System.out.println("Set Select row upper wala");
-                                System.out.println("Selected row : " + ListViewq_quarantinemanagement.getSelectedRowIndex());
-
                                 acceptedQty = Integer.parseInt(formObject.getNGValue("Q_acceptedquantity"));
                                 rejectedQty = Integer.parseInt(formObject.getNGValue("Q_rejectedquantity"));
                                 System.out.println("acceptedQty1 : " + acceptedQty);
@@ -261,41 +229,23 @@ public class QualityUser implements FormListener {
                             } else {
                                 acceptedQty = Integer.parseInt(formObject.getNGValue("Q_acceptedquantity"));
                                 rejectedQty = Integer.parseInt(formObject.getNGValue("Q_rejectedquantity"));
-                                System.out.println("acceptedQty2 : " + acceptedQty);
-                                System.out.println("rejectedQty2 : " + rejectedQty);
                                 sumofAccepReject = acceptedQty + rejectedQty;
-                                System.out.println("sumofAccepReject2 : " + sumofAccepReject);
-
                                 if (sumofGRN >= sumofAccepReject) {
-                                    System.out.println("inside add row");
                                     formObject.ExecuteExternalCommand("NGAddRow", "q_quarantinemanagement");
                                 } else {
                                     throw new ValidatorException(new FacesMessage("Sum of Accepted Qty & Rejected Qty is exceeding by GRN Qty", ""));
                                 }
                             }
-
-                        } //                        else if(RowCountq_quarantinemanagement==0){
-                        //                             
-                        //                            System.out.println("fill details m agya"); 
-                        //                            throw new ValidatorException(new FacesMessage("Kindly fill all the details", "")); 
-                        //                        
-                        //                        } 
-                        else {
+                        } else {
                             acceptedQty = Integer.parseInt(formObject.getNGValue("Q_acceptedquantity"));
                             rejectedQty = Integer.parseInt(formObject.getNGValue("Q_rejectedquantity"));
-                            System.out.println("acceptedQty3 : " + acceptedQty);
-                            System.out.println("rejectedQty3 : " + rejectedQty);
                             sumofAccepReject = acceptedQty + rejectedQty;
-                            System.out.println("sumofAccepReject3 : " + sumofAccepReject);
-
                             if (sumofGRN >= sumofAccepReject) {
-                                System.out.println("outside add row");
                                 formObject.ExecuteExternalCommand("NGAddRow", "q_quarantinemanagement");
                             } else {
                                 throw new ValidatorException(new FacesMessage("Sum of Accepted Qty & Rejected Qty is exceeding by GRN Qty", ""));
                             }
                         }
-
                         break;
                 }
 

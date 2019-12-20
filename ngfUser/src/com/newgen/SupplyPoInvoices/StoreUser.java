@@ -200,12 +200,8 @@ public class StoreUser implements FormListener {
                         inviceAmount = Float.parseFloat(formObject.getNGValue("invoiceamount"));
                         System.out.println("invoiceamount :: " + inviceAmount);
                         if(inviceAmount==sumofUnitPrice){
-                            System.out.println("Equal h mere bhai");
-                        }else{
-                            System.out.println("Tata bye bye");
-                        }
-
-                        try {
+                            System.out.println("amount u");
+                             try {
                             System.out.println("Inside button click Btn_GenerateGRN");
                             JSONObject request_json = new JSONObject();
                             JSONArray grnlinearray = new JSONArray();
@@ -258,6 +254,13 @@ public class StoreUser implements FormListener {
                         if (!webserviceStatus.equalsIgnoreCase("true")) {
                             throw new ValidatorException(new FacesMessage("Error : " + webserviceStatus, ""));
                         }
+                        }else{
+                            System.out.println("Invoice amount mismatch");
+                            
+                            //show alert
+                        }
+
+                       
 
                         break;
 

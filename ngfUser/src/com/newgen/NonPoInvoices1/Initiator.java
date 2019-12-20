@@ -274,10 +274,10 @@ public class Initiator implements FormListener {
             System.out.println("levelflag : " + levelflag);
             //Query = "select ApproverName from ApproverMaster where Head='" + proctype + "' "
             // + "and ApproverLevel='" + levelflag + "' and State= limit 1";
-            Query = "select ApproverName from ApproverMaster where Head ='" + proctype + "'and ApproverLevel='" + levelflag + "'";
+            Query = "select TOP 1 ApproverName from ApproverMaster where Head ='" + proctype + "'and ApproverLevel='" + levelflag + "'";
             //+"and State ='" + state + "'";
             if (!proctype.equalsIgnoreCase("Demurrage and Wharfage (Plant/GU) (Rail)") || !proctype.equalsIgnoreCase("Primary Freight and Freight on clinker Sale (Rail)") || !proctype.equalsIgnoreCase("Other Logistic Expenses (Rail)") || !proctype.equalsIgnoreCase("Travel Allowance Bills (TA Bills) (Train)")) {
-                Query = "select ApproverName from ApproverMaster where Head ='" + proctype + "'and ApproverLevel='" + levelflag + "'"
+                Query = "select TOP 1 ApproverName from ApproverMaster where Head ='" + proctype + "'and ApproverLevel='" + levelflag + "'"
                         + "and State ='" + state + "'";
             }
             System.out.println("Query:" + Query);

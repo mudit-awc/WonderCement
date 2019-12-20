@@ -213,10 +213,10 @@ public class Accounts implements FormListener {
         System.out.println("query is :" + Query);
         result = formObject.getDataFromDataSource(Query);
         System.out.println("result is :" + result);
-        for (int i = 0; i < result.size(); i++) {
-            formObject.addComboItem("Drop_ss1", result.get(i).get(1), result.get(i).get(0));
-            formObject.addComboItem("Drop_ss2", result.get(i).get(1), result.get(i).get(0));
-            formObject.addComboItem("Drop_ss3", result.get(i).get(1), result.get(i).get(0));
+        for (int d = 0; d < result.size(); d++) {
+            formObject.addComboItem("Drop_ss1", result.get(d).get(0), result.get(d).get(0));
+            formObject.addComboItem("Drop_ss2", result.get(d).get(0), result.get(d).get(0));
+            formObject.addComboItem("Drop_ss3", result.get(d).get(0), result.get(d).get(0));
     }
     }
 
@@ -253,10 +253,10 @@ public class Accounts implements FormListener {
             String proctype = formObject.getNGValue("proctype");
             String state=formObject.getNGValue("servicegiveninstate");
             if(activityName.equalsIgnoreCase("Accounts")){
-            Query1 = "select ApproverName from ApproverMaster where Head='" + proctype + "' "
-                    + "order by ApproverLevel desc limit 1";
+            Query1 = "select TOP 1 ApproverName from ApproverMaster where Head='" + proctype + "' "
+                    + "order by ApproverLevel DESC";
             if(!proctype.equalsIgnoreCase("Demurrage and Wharfage (Plant/GU) (Rail)")||!proctype.equalsIgnoreCase("Primary Freight and Freight on clinker Sale (Rail)")||!proctype.equalsIgnoreCase("Other Logistic Expenses (Rail)")||!proctype.equalsIgnoreCase("Travel Allowance Bills (TA Bills) (Train)")){
-            Query1 = "select ApproverName from ApproverMaster where Head='"+ proctype +"' and State = '"+ state +"' order by ApproverLevel desc limit 1";
+            Query1 = "select TOP 1 ApproverName from ApproverMaster where Head='"+ proctype +"' and State = '"+ state +"' order by ApproverLevel DESC";
             }
             System.out.println("Query1:" + Query1);
             result1 = formObject.getDataFromDataSource(Query1);
